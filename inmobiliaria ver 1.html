@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Cita Inmobiliaria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #555;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .confirmation {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agendar Cita</h1>
+    <form id="appointmentForm">
+      <label for="name">Nombre Completo</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Correo Electrónico</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Número de Teléfono</label>
+      <input type="tel" id="phone" required>
+
+      <label for="appointmentType">Tipo de Cita</label>
+      <select id="appointmentType" required>
+        <option value="visita">Visita a Propiedad</option>
+        <option value="asesoria">Asesoría</option>
+      </select>
+
+      <label for="date">Fecha</label>
+      <input type="date" id="date" required>
+
+      <label for="time">Hora</label>
+      <input type="time" id="time" required>
+
+      <button type="submit">Agendar Cita</button>
+    </form>
+
+    <div id="confirmation" class="confirmation">
+      <h2>¡Cita Agendada!</h2>
+      <p><strong>Nombre:</strong> <span id="confName"></span></p>
+      <p><strong>Correo Electrónico:</strong> <span id="confEmail"></span></p>
+      <p><strong>Número de Teléfono:</strong> <span id="confPhone"></span></p>
+      <p><strong>Tipo de Cita:</strong> <span id="confType"></span></p>
+      <p><strong>Fecha:</strong> <span id="confDate"></span></p>
+      <p><strong>Hora:</strong> <span id="confTime"></span></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Obtener valores del formulario
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const appointmentType = document.getElementById('appointmentType').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      // Mostrar confirmación
+      document.getElementById('confName').innerText = name;
+      document.getElementById('confEmail').innerText = email;
+      document.getElementById('confPhone').innerText = phone;
+      document.getElementById('confType').innerText = appointmentType === 'visita' ? 'Visita a Propiedad' : 'Asesoría';
+      document.getElementById('confDate').innerText = date;
+      document.getElementById('confTime').innerText = time;
+      document.getElementById('confirmation').style.display = 'block';
+
+      // Limpiar formulario
+      document.getElementById('appointmentForm').reset();
+    });
+  </script>
+</body>
+</html>
